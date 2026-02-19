@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antikor Ast • Астана • Антикоррозийная обработка и шумоизоляция</title>
+  <meta name="description" content="Астана: антикоррозийная обработка, шумоизоляция салона, обработка скрытых полостей кузова, установка защитной сетки радиатора. Калькулятор и WhatsApp." />
+
+  <style>
+    :root{
+      --bg1:#f7fbff;
+      --bg2:#eef5ff;
+
+      --text:#0b1b33;
+      --muted: rgba(11,27,51,.72);
+
+      --glass: rgba(255,255,255,.70);
+      --glass2: rgba(255,255,255,.46);
+      --stroke: rgba(60,120,255,.18);
+      --shadow: 0 18px 60px rgba(30,80,160,.12);
+
+      --accent:#2f7bff;
+      --accent2:#7a5cff;
+      --ok:#16a34a;
+
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 10% 10%, rgba(47,123,255,.16), transparent 55%),
+        radial-gradient(900px 520px at 90% 20%, rgba(122,92,255,.12), transparent 55%),
+        radial-gradient(900px 620px at 50% 100%, rgba(0,200,255,.08), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:18px 16px 64px; }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      padding:10px 0;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(247,251,255,.90), rgba(247,251,255,.60));
+      border-bottom: 1px solid rgba(60,120,255,.10);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      max-width:var(--max); margin:0 auto; padding:0 16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:0;
+    }
+    .mark{
+      width:40px; height:40px; border-radius:15px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.92), rgba(255,255,255,.25) 55%, transparent 56%),
+        linear-gradient(135deg, rgba(47,123,255,.78), rgba(122,92,255,.68));
+      box-shadow: 0 14px 44px rgba(47,123,255,.20);
+      border: 1px solid rgba(255,255,255,.60);
+    }
+    .brand h1{
+      font-size:14px; margin:0; line-height:1.1; font-weight:950; letter-spacing:.2px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand .sub{ font-size:12px; color:var(--muted); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .nav{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:999px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(60,120,255,.16);
+      box-shadow: 0 10px 30px rgba(20,60,120,.10);
+      font-size:13px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.80);
+      border-color: rgba(47,123,255,.30);
+      box-shadow: 0 14px 44px rgba(47,123,255,.12);
+    }
+
+    /* Card */
+    .card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--glass), var(--glass2));
+      border: 1px solid rgba(60,120,255,.16);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(980px 280px at 20% 0%, rgba(255,255,255,.78), transparent 60%),
+        radial-gradient(760px 260px at 80% 10%, rgba(47,123,255,.16), transparent 60%),
+        radial-gradient(780px 260px at 30% 110%, rgba(122,92,255,.12), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .card > *{ position:relative; }
+
+    .btn{
+      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius: 16px;
+      border:1px solid rgba(60,120,255,.18);
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 16px 44px rgba(20,60,120,.12);
+      font-weight:950;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.86);
+      border-color: rgba(47,123,255,.30);
+      box-shadow: 0 18px 56px rgba(20,60,120,.14), 0 0 28px rgba(47,123,255,.12);
+    }
+    .btn.primary{
+      color:#fff;
+      border-color: rgba(255,255,255,.25);
+      background: linear-gradient(135deg, rgba(47,123,255,.92), rgba(122,92,255,.88));
+      box-shadow: 0 18px 60px rgba(47,123,255,.20);
+    }
+    .btn.wa{
+      border-color: rgba(22,163,74,.20);
+      background: rgba(22,163,74,.12);
+    }
+    .btn.wa:hover{ background: rgba(22,163,74,.16); }
+
+    /* HERO (parallax + text behind car) */
+    .heroParallax{
+      margin-top:16px;
+      position:relative;
+      border-radius: 28px;
+      overflow:hidden;
+      border: 1px solid rgba(60,120,255,.14);
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 22px 70px rgba(20,60,120,.14);
+      min-height: clamp(460px, 72vh, 740px);
+    }
+    .heroParallax .layer{
+      position:absolute; inset:0;
+      will-change: transform, opacity;
+      transform: translate3d(0,0,0);
+      pointer-events:none;
+    }
+    .heroParallax .bg{
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.02) contrast(1.03);
+    }
+    .heroParallax .frontCar{
+      background-size: cover;
+      background-position: center;
+      -webkit-mask-image: radial-gradient(ellipse at 58% 60%, rgba(0,0,0,1) 0 42%, rgba(0,0,0,.92) 49%, rgba(0,0,0,0) 66%);
+              mask-image: radial-gradient(ellipse at 58% 60%, rgba(0,0,0,1) 0 42%, rgba(0,0,0,.92) 49%, rgba(0,0,0,0) 66%);
+      filter: drop-shadow(0 34px 40px rgba(0,0,0,.18));
+    }
+    .heroParallax .shine{
+      background: radial-gradient(760px 300px at 42% 24%, rgba(255,255,255,.55), transparent 60%);
+      mix-blend-mode: screen;
+      opacity:.55;
+    }
+    .heroParallax .tint{
+      background: linear-gradient(180deg, rgba(247,251,255,.78), rgba(247,251,255,.06) 55%, rgba(247,251,255,.78));
+      opacity:.96;
+    }
+    .heroParallax .bigText{
+      position:absolute;
+      left: clamp(16px, 4vw, 42px);
+      top: clamp(26px, 6vh, 56px);
+      max-width: 22ch;
+      font-weight: 1000;
+      letter-spacing: -1.4px;
+      line-height: 0.95;
+      font-size: clamp(34px, 5.2vw, 74px);
+      color: rgba(11,27,51,.92);
+      text-shadow: 0 18px 44px rgba(20,60,120,.18);
+      z-index: 3;
+      will-change: transform, opacity;
+    }
+    .heroParallax .subText{
+      position:absolute;
+      left: clamp(16px, 4vw, 42px);
+      top: calc(clamp(26px, 6vh, 56px) + clamp(86px, 11vw, 150px));
+      max-width: 68ch;
+      font-size: 14px;
+      color: rgba(11,27,51,.70);
+      z-index: 3;
+      will-change: transform, opacity;
+    }
+    .heroParallax .ctaRow{
+      position:absolute;
+      left: clamp(16px, 4vw, 42px);
+      bottom: clamp(14px, 4vh, 34px);
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      z-index: 6;
+    }
+
+    /* Main */
+    .hero{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .hero{ grid-template-columns:1fr; } }
+
+    .heroMain{ padding:22px; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(60,120,255,.16);
+      font-size:12px; color: rgba(11,27,51,.78);
+    }
+    .title{
+      margin:12px 0 10px;
+      font-size:34px;
+      line-height:1.08;
+      letter-spacing:-.8px;
+    }
+    @media (max-width: 520px){ .title{ font-size:28px; } }
+    .lead{
+      margin:0 0 14px;
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.7;
+      max-width:70ch;
+    }
+    .actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+    .small{ font-size:12px; color:var(--muted); line-height:1.55; }
+
+    /* Calculator */
+    .heroSide{ padding:18px; }
+    .miniTitle{ margin:4px 0 10px; font-size:16px; font-weight:1000; letter-spacing:-.2px; }
+
+    .seg{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+    .seg button{
+      flex:1 1 160px;
+      padding:11px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(60,120,255,.16);
+      background: rgba(255,255,255,.62);
+      font-weight:1000;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .seg button:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.82);
+      border-color: rgba(47,123,255,.26);
+      box-shadow: 0 0 26px rgba(47,123,255,.10);
+    }
+    .seg button.active{
+      background: linear-gradient(135deg, rgba(47,123,255,.16), rgba(122,92,255,.12));
+      border-color: rgba(47,123,255,.30);
+    }
+
+    .fieldGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 520px){ .fieldGrid{ grid-template-columns:1fr; } }
+    .field{
+      padding:12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(60,120,255,.14);
+    }
+    .field label{
+      display:block;
+      font-size:12px;
+      color: rgba(11,27,51,.74);
+      margin-bottom:6px;
+      font-weight:900;
+    }
+    select, input[type="number"], input[type="text"]{
+      width:100%;
+      border-radius: 14px;
+      border:1px solid rgba(60,120,255,.18);
+      background: rgba(255,255,255,.85);
+      padding:10px 10px;
+      outline:none;
+      font-weight:800;
+      color: var(--text);
+    }
+
+    /* Brand logo preview */
+    .brandPreview{
+      margin-top:10px;
+      display:flex; align-items:center; gap:12px;
+      padding:12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(60,120,255,.14);
+    }
+    .brandPreview.hidden{ display:none; }
+    .brandPreview .logoBox{
+      width:44px; height:44px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.72);
+      border:1px solid rgba(60,120,255,.14);
+      display:grid; place-items:center;
+      overflow:hidden;
+    }
+    .brandPreview img{ width:82%; height:82%; object-fit:contain; }
+    .brandPreview b{ display:block; font-size:13px; }
+    .brandPreview span{ display:block; margin-top:2px; font-size:12px; color: rgba(11,27,51,.68); }
+
+    .inlineNote{
+      margin-top:10px;
+      padding:12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.60);
+      border:1px solid rgba(60,120,255,.14);
+    }
+
+    .svc{ display:grid; gap:10px; margin-top:12px; }
+    .svc label{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      padding:12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(60,120,255,.14);
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .svc label:hover{ transform: translateY(-1px); background: rgba(255,255,255,.84); border-color: rgba(47,123,255,.24); }
+    .svc .left b{ display:block; font-size:13px; }
+    .svc .left span{ display:block; font-size:12px; color:var(--muted); margin-top:2px; }
+    .svc .right{ display:flex; align-items:center; gap:10px; }
+    .pill{
+      font-weight:1000;
+      white-space:nowrap;
+      background: rgba(47,123,255,.10);
+      border: 1px solid rgba(47,123,255,.18);
+      padding:8px 10px;
+      border-radius: 999px;
+      color: rgba(11,27,51,.88);
+    }
+    .svc input{ transform: translateY(2px) scale(1.15); }
+
+    .summary{
+      margin-top:12px;
+      padding:12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(60,120,255,.16);
+    }
+    .summaryTop{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+    .total{ font-weight:1100; font-size:18px; letter-spacing:-.2px; }
+    .summary ul{ margin:8px 0 0; padding-left:18px; color: rgba(11,27,51,.82); font-size:13px; }
+
+    /* Sections */
+    .section{ margin-top:16px; padding:22px; }
+    .section h2{ margin:0 0 8px; font-size:22px; letter-spacing:-.4px; }
+    .section p{ margin:0; color:var(--muted); font-size:15px; line-height:1.7; max-width:85ch; }
+
+    .faqGrid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){ .faqGrid{ grid-template-columns:1fr; } }
+    details{
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(60,120,255,.14);
+      border-radius: 18px;
+      padding:12px 12px;
+    }
+    details[open]{ border-color: rgba(47,123,255,.22); background: rgba(255,255,255,.82); }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      font-weight:1000;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width:34px; height:34px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      border:1px solid rgba(60,120,255,.14);
+      background: rgba(255,255,255,.60);
+      transition: transform .15s ease;
+      flex: 0 0 auto;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+    .detailsBody{ margin-top:10px; color: rgba(11,27,51,.80); font-size:14px; line-height:1.7; }
+
+    .contactBox{ margin-top:12px; display:grid; grid-template-columns: 1fr; gap:10px; }
+    .rowLink{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(60,120,255,.14);
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      color: var(--text);
+    }
+    .rowLink:hover{ transform: translateY(-1px); background: rgba(255,255,255,.84); border-color: rgba(47,123,255,.24); }
+    .rowLink b{ color: var(--text); }
+    .rowLink small{ color:var(--muted); display:block; margin-top:2px; }
+    .badge{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border: 1px solid rgba(60,120,255,.16);
+      background: rgba(255,255,255,.62);
+      white-space:nowrap;
+      font-weight:900;
+      color: rgba(11,27,51,.78);
+    }
+
+    /* Modal */
+    .modalOverlay{
+      position:fixed; inset:0;
+      background: rgba(7,20,45,.35);
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      padding:16px;
+      z-index:80;
+    }
+    .modalOverlay.open{ display:flex; }
+    .modal{
+      width:min(560px, 100%);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.62));
+      border: 1px solid rgba(60,120,255,.16);
+      box-shadow: 0 30px 90px rgba(0,0,0,.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      overflow:hidden;
+      color: var(--text);
+    }
+    .modalHead{
+      padding:14px 14px 10px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom: 1px solid rgba(60,120,255,.12);
+    }
+    .modalHead b{ font-size:14px; color: var(--text); }
+    .xbtn{
+      width:40px; height:40px;
+      border-radius: 16px;
+      border:1px solid rgba(60,120,255,.14);
+      background: rgba(255,255,255,.62);
+      cursor:pointer;
+      font-weight:1000;
+      color: var(--text);
+    }
+    .modalBody{ padding:14px; }
+
+    /* Floating WhatsApp */
+    .fab{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:90;
+    }
+    .fab .btn{ border-radius:999px; padding:13px 14px; }
+
+    footer{ margin-top:18px; color: rgba(11,27,51,.55); font-size:12px; text-align:center; }
+
+    @media (prefers-reduced-motion: reduce){
+      .chip,.btn,.rowLink,.svc label,.seg button{ transition:none !important; }
+      .heroParallax .layer, .heroParallax .bigText, .heroParallax .subText{ transform:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="row">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div style="min-width:0">
+          <h1>Antikor Ast • Астана</h1>
+          <div class="sub">Антикоррозийная обработка и шумоизоляция • Байшешек 5а</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Навигация">
+        <a class="chip" href="#calc">Расчёт</a>
+        <a class="chip" href="#why">Зачем</a>
+        <a class="chip" href="#faq">FAQ</a>
+        <a class="chip" href="#contacts">Контакты</a>
+        <a class="chip" href="#map">Маршрут</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- HERO WITH UPDATED IMAGE (only change needed) -->
+    <section class="heroParallax" id="home" aria-label="Параллакс блок с автомобилем">
+      <div class="layer bg" id="heroBg" data-depth="0.10" aria-hidden="true"></div>
+      <div class="layer shine" data-depth="0.24" aria-hidden="true"></div>
+      <div class="layer frontCar" id="heroFront" data-depth="0.34" aria-hidden="true"></div>
+      <div class="layer tint" aria-hidden="true"></div>
+
+      <div class="bigText" id="heroText">Антикоррозийная обработка</div>
+      <div class="subText" id="heroSub"></div>
+
+      <div class="ctaRow">
+        <button class="btn primary" id="openPhone1" type="button" aria-haspopup="dialog">
+          Связаться: +7 707 794 9425 (Али)
+        </button>
+        <a class="btn" href="#calc">Рассчитать стоимость</a>
+        <a class="btn" href="https://www.tiktok.com/@antikor_ast?_r=1&_t=ZS-93pJ9dYPBuW" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="card heroMain">
+        <div class="kicker">Светлый glass • Удобный расчёт • WhatsApp сообщение</div>
+        <h2 class="title">Антикоррозийная обработка и шумоизоляция — под ваш автомобиль</h2>
+        <p class="lead">
+          Выберите марку/модель, год и пробег — сайт посчитает ориентировочную стоимость “от …”
+          и сформирует сообщение для WhatsApp.
+        </p>
+        <div class="actions">
+          <button class="btn primary" id="openPhone2" type="button" aria-haspopup="dialog">Позвонить или написать в WhatsApp</button>
+          <a class="btn" href="#contacts">Контакты и маршрут</a>
+        </div>
+        <p class="small" style="margin-top:12px;">
+          Цены “от …” — ориентиры. Итоговая стоимость рассчитывается индивидуально после уточнения модели, года и состояния автомобиля.
+        </p>
+      </div>
+
+      <aside class="card heroSide" id="calc">
+        <div class="miniTitle">Расчёт (ориентировочно)</div>
+
+        <div class="seg" role="tablist" aria-label="Тип кузова">
+          <button type="button" class="active" id="btnCrossover">Кроссовер</button>
+          <button type="button" id="btnSedan">Седан</button>
+        </div>
+
+        <div class="fieldGrid" aria-label="Параметры автомобиля">
+          <div class="field">
+            <label for="brand">Марка</label>
+            <select id="brand"></select>
+          </div>
+
+          <div class="field">
+            <label for="model">Модель</label>
+            <select id="model" disabled></select>
+          </div>
+
+          <div class="field">
+            <label for="yearSelect">Год выпуска</label>
+            <select id="yearSelect"></select>
+          </div>
+
+          <div class="field">
+            <label for="mileage">Пробег (км)</label>
+            <input id="mileage" type="number" inputmode="numeric" min="0" step="1000" placeholder="например: 45000" />
+          </div>
+        </div>
+
+        <div class="brandPreview hidden" id="brandPreview" aria-live="polite">
+          <div class="logoBox"><img id="brandLogo" alt="Логотип бренда" /></div>
+          <div>
+            <b id="brandTitle">—</b>
+            <span id="brandSub">Выбрана марка и модель</span>
+          </div>
+        </div>
+
+        <div class="inlineNote">
+          <div class="small" style="margin:0;">
+            Не нашли свой автомобиль? <b>Добавьте вручную</b> — данные попадут в WhatsApp.
+          </div>
+
+          <details style="margin-top:10px;">
+            <summary>Добавить автомобиль вручную <span class="chev">⌄</span></summary>
+            <div class="detailsBody">
+              <div class="fieldGrid">
+                <div class="field">
+                  <label for="manualBrand">Марка (вручную)</label>
+                  <input id="manualBrand" type="text" placeholder="например: Changan" />
+                </div>
+                <div class="field">
+                  <label for="manualModel">Модель (вручную)</label>
+                  <input id="manualModel" type="text" placeholder="например: X5 Plus" />
+                </div>
+                <div class="field">
+                  <label for="manualYear">Год выпуска (вручную)</label>
+                  <input id="manualYear" type="number" inputmode="numeric" min="1990" max="2100" placeholder="например: 2023" />
+                </div>
+                <div class="field">
+                  <label for="manualMileage">Пробег (км, вручную)</label>
+                  <input id="manualMileage" type="number" inputmode="numeric" min="0" step="1000" placeholder="например: 12000" />
+                </div>
+              </div>
+
+              <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn" id="useManual" type="button">Использовать ручной ввод</button>
+                <button class="btn" id="useSelect" type="button">Вернуться к списку</button>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="svc" id="svcList" aria-label="Список услуг"></div>
+
+        <div class="summary" aria-live="polite">
+          <div class="summaryTop">
+            <div>
+              <div class="small">Итого “от”</div>
+              <div class="total" id="total">0 тг</div>
+            </div>
+            <button class="btn wa" id="btnWhatsApp" type="button">Написать в WhatsApp</button>
+          </div>
+
+          <div class="small" id="summaryText">Выберите услуги — сообщение сформируется автоматически.</div>
+          <ul id="summaryList"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card section" id="why">
+      <h2>Почему это нужно делать</h2>
+      <p>
+        Антикоррозийная обработка защищает днище, арки и швы от реагентов и пескоструя.
+        Шумоизоляция салона снижает дорожный гул и вибрации. Мы подбираем объём работ под ваш автомобиль и его состояние.
+      </p>
+    </section>
+
+    <section class="card section" id="faq">
+      <h2>FAQ</h2>
+      <p>Откройте нужный пункт.</p>
+
+      <div class="faqGrid">
+        <details>
+          <summary>Зачем нужна антикоррозийная обработка? <span class="chev">⌄</span></summary>
+          <div class="detailsBody">
+            Она создаёт защитный слой на днище и в арках, который снижает воздействие реагентов, воды и пескоструя — и уменьшает риск коррозии.
+          </div>
+        </details>
+        <details>
+          <summary>Зачем нужна обработка скрытых полостей кузова? <span class="chev">⌄</span></summary>
+          <div class="detailsBody">
+            Коррозия часто начинается изнутри: в порогах, усилителях, лонжеронах. Обработка закрывает “невидимые” зоны и продлевает срок службы кузова.
+          </div>
+        </details>
+        <details>
+          <summary>Зачем нужна шумоизоляция салона? <span class="chev">⌄</span></summary>
+          <div class="detailsBody">
+            Снижает дорожный шум, шум колёсных арок и вибрации. В результате — тише в салоне и комфортнее на трассе и в городе.
+          </div>
+        </details>
+        <details>
+          <summary>Зачем нужна установка защитной сетки радиатора? <span class="chev">⌄</span></summary>
+          <div class="detailsBody">
+            Сетка защищает радиатор от камней и загрязнений, снижая риск повреждений и дорогостоящего ремонта.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="card section" id="contacts">
+      <h2>Контакты</h2>
+      <p>Нажмите на номер — появится выбор: звонок или WhatsApp.</p>
+
+      <div class="contactBox">
+        <button class="rowLink" id="openPhone3" type="button" aria-haspopup="dialog">
+          <div>
+            <b>+7 707 794 9425</b>
+            <small>Али • Астана</small>
+          </div>
+          <div class="badge">Связаться</div>
+        </button>
+
+        <a class="rowLink" href="https://go.2gis.com/1mlkw" target="_blank" rel="noopener">
+          <div>
+            <b>Маршрут в 2GIS</b>
+            <small>Байшешек 5а</small>
+          </div>
+          <div class="badge">2GIS</div>
+        </a>
+
+        <a class="rowLink" id="googleRoute" href="#" target="_blank" rel="noopener">
+          <div>
+            <b>Маршрут в Google Maps</b>
+            <small>Байшешек 5а</small>
+          </div>
+          <div class="badge">Maps</div>
+        </a>
+
+        <a class="rowLink" href="https://www.tiktok.com/@antikor_ast?_r=1&_t=ZS-93pJ9dYPBuW" target="_blank" rel="noopener">
+          <div>
+            <b>TikTok</b>
+            <small>@antikor_ast</small>
+          </div>
+          <div class="badge">Открыть</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="card section" id="map">
+      <h2>Маршрут</h2>
+      <p>Адрес: <b>Байшешек 5а</b>. Нажмите — откроется маршрут.</p>
+      <div class="contactBox" style="margin-top:12px;">
+        <a class="rowLink" href="https://go.2gis.com/1mlkw" target="_blank" rel="noopener">
+          <div>
+            <b>Построить маршрут в 2GIS</b>
+            <small>Откроет навигацию по вашей ссылке</small>
+          </div>
+          <div class="badge">2GIS</div>
+        </a>
+        <a class="rowLink" id="googleRoute2" href="#" target="_blank" rel="noopener">
+          <div>
+            <b>Построить маршрут в Google Maps</b>
+            <small>Откроет “Маршрут” до Байшешек 5а</small>
+          </div>
+          <div class="badge">Maps</div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Antikor Ast • Астана
+    </footer>
+  </main>
+
+  <div class="fab">
+    <button class="btn wa" id="fabWa" type="button">WhatsApp • Записаться</button>
+  </div>
+
+  <div class="modalOverlay" id="phoneModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modalHead">
+        <b id="modalTitle">Связаться с Али</b>
+        <button class="xbtn" type="button" id="closeModal" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modalBody">
+        <div style="display:grid; gap:10px;">
+          <a class="btn" href="tel:+77077949425">Позвонить: <b>+7 707 794 9425</b></a>
+          <button class="btn wa" id="btnWhatsAppFromModal" type="button">Написать в WhatsApp (с расчётом)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ====== ONLY CHANGE: hero image URL (Google Drive direct) ======
+    const HERO_IMAGE_URL="https://drive.google.com/uc?export=download&id=1sh9nTF6bZJJ2kCNt5GVqCM29tslgoVwi";
+    document.getElementById("heroBg").style.backgroundImage = `url("${HERO_IMAGE_URL}")`;
+    document.getElementById("heroFront").style.backgroundImage = `url("${HERO_IMAGE_URL}")`;
+
+    // ====== Rest: all previous functions (calculator, WA, manual, logos, parallax) ======
+    const phoneE164 = "77077949425";
+    const dest = "Байшешек 5а, Астана";
+    const g1 = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}&travelmode=driving`;
+    document.getElementById("googleRoute").href = g1;
+    document.getElementById("googleRoute2").href = g1;
+
+    const brandLogos = {
+      "Changan": "https://static.tildacdn.com/tild3863-6662-4531-a636-356364333831/Changan-Logo_____2.png",
+      "Chery": "https://avatars.mds.yandex.net/i?id=5d212afb8c0b6cdce8ea29eb1413bd115489d42a-5353188-images-thumbs&n=13",
+      "Omoda": "https://photobank.maximum.expert/photo/seo-articles/omoda-logo/omoda-logo-big.jpg",
+      "Jaecoo": "https://www.vtb.ru/media-files/vtb.ru/shared/images/hero/Avto_H_Jaecoo_1x.webp",
+      "Jetour": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Jetour_logo.svg/7467px-Jetour_logo.svg.png",
+      "Geely": "https://avatars.mds.yandex.net/i?id=678530ea32d7ce2b61f034c0e9652ac7ec2656ce-4290971-images-thumbs&n=13",
+      "Haval": "https://avatars.mds.yandex.net/i?id=52937f505917d6e8384c6cb14fd43eac5ac6dedb-12411982-images-thumbs&n=13",
+      "Tank": "https://автолого.рф/wp-content/uploads/tank-big.png",
+      "BYD": "https://avatars.mds.yandex.net/i?id=3c5897623c1c72c92cdd6a349d1d162fdf0ca826-7546197-images-thumbs&n=13"
+    };
+
+    const carDB = {
+      "Changan": ["Alsvin","CS35 Plus","CS55 Plus","CS75 Plus","UNI-K","UNI-T","UNI-V","X5 Plus"],
+      "Chery": ["Tiggo 2 Pro","Tiggo 4 Pro","Tiggo 7 Pro","Tiggo 7 Pro Max","Tiggo 8 Pro","Tiggo 8 Pro Max","Arrizo 8"],
+      "Omoda": ["C5","S5"],
+      "Jaecoo": ["J7"],
+      "Jetour": ["Dashing","X70","X90"],
+      "Geely": ["Coolray","Atlas","Monjaro","Tugella","Emgrand"],
+      "Haval": ["Jolion","F7","Dargo","H6"],
+      "Tank": ["300","500"],
+      "BYD": ["Dolphin","Atto 3 (Yuan Plus)","Song Plus","Qin Plus"]
+    };
+
+    const services = [
+      { id:"anticorrosion", title:"Антикоррозийная обработка", note:"Днище и арки — защита от реагентов и пескоструя", priceFromByType:{crossover:70000, sedan:60000}, labelFromByType:{crossover:"от 70 000 тг", sedan:"от 60 000 тг"} },
+      { id:"soundproofing", title:"Шумоизоляция колесных арок", note:"Снижение дорожного гула и шума от колёсных арок", priceFromByType:{crossover:60000, sedan:60000}, labelFromByType:{crossover:"от 60 000 тг", sedan:"от 60 000 тг"} },
+      { id:"cavities", title:"Обработка скрытых полостей кузова", note:"Пороги/лонжероны — дополнительная защита изнутри", priceFromByType:{crossover:30000, sedan:30000}, labelFromByType:{crossover:"30 000 тг", sedan:"30 000 тг"} },
+      { id:"radiator_mesh", title:"Установка защитной сетки радиатора", note:"Защита радиатора от камней и загрязнений", priceFromByType:{crossover:10000, sedan:10000}, labelFromByType:{crossover:"10 000 тг", sedan:"10 000 тг"} },
+      { id:"soundproofing-1", title:"Шумоизоляция салона", note:"Снижение дорожного гула и шума от колёсных арок", priceFromByType:{crossover:300000, sedan:250000}, labelFromByType:{crossover:"от 300 000 тг", sedan:"от 250 000 тг"} }
+
+    ];
+
+    let carType = "crossover";
+    const selected = new Set(["anticorrosion"]);
+    let useManualCar = false;
+
+    const svcList = document.getElementById("svcList");
+    const totalEl = document.getElementById("total");
+    const summaryText = document.getElementById("summaryText");
+    const summaryList = document.getElementById("summaryList");
+
+    const brandSel = document.getElementById("brand");
+    const modelSel = document.getElementById("model");
+    const yearSel = document.getElementById("yearSelect");
+    const mileageInp = document.getElementById("mileage");
+
+    const manualBrand = document.getElementById("manualBrand");
+    const manualModel = document.getElementById("manualModel");
+    const manualYear = document.getElementById("manualYear");
+    const manualMileage = document.getElementById("manualMileage");
+
+    const btnC = document.getElementById("btnCrossover");
+    const btnS = document.getElementById("btnSedan");
+
+    const brandPreview = document.getElementById("brandPreview");
+    const brandLogo = document.getElementById("brandLogo");
+    const brandTitle = document.getElementById("brandTitle");
+    const brandSub = document.getElementById("brandSub");
+
+    const fmt = (n) => new Intl.NumberFormat("ru-RU").format(n) + " тг";
+    const escapeHtml = (s) =>
+      String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+
+    function getLabelFrom(svc){ return svc.labelFromByType[carType] || ""; }
+    function getPriceFrom(svc){ return svc.priceFromByType[carType] ?? 0; }
+    function getCarLabel(){ return carType === "crossover" ? "Кроссовер" : "Седан"; }
+
+    function getSelectedCarData(){
+      if (useManualCar){
+        return {
+          brand: manualBrand.value.trim() || "—",
+          model: manualModel.value.trim() || "—",
+          year: manualYear.value ? String(manualYear.value) : "—",
+          mileage: manualMileage.value ? `${manualMileage.value} км` : (mileageInp.value ? `${mileageInp.value} км` : "—"),
+          source: "manual"
+        };
+      }
+      return {
+        brand: brandSel.value || "—",
+        model: modelSel.value || "—",
+        year: yearSel.value || "—",
+        mileage: mileageInp.value ? `${mileageInp.value} км` : "—",
+        source: "select"
+      };
+    }
+
+    function updateBrandPreview(){
+      const car = getSelectedCarData();
+      const hasBrand = car.brand && car.brand !== "—";
+      if (!hasBrand){
+        brandPreview.classList.add("hidden");
+        return;
+      }
+      brandPreview.classList.remove("hidden");
+      brandTitle.textContent = `${car.brand}${car.model && car.model !== "—" ? " • " + car.model : ""}`;
+      brandSub.textContent = (car.source === "manual") ? "Данные введены вручную" : "Выбор из списка";
+
+      const logo = brandLogos[car.brand];
+      if (logo){
+        brandLogo.src = logo;
+        brandLogo.style.opacity = "1";
+      } else {
+        brandLogo.removeAttribute("src");
+        brandLogo.style.opacity = "0";
+      }
+    }
+
+    function buildWhatsAppText(){
+      const car = getSelectedCarData();
+      const chosen = services.filter(s => selected.has(s.id));
+      const totalFrom = chosen.reduce((sum, s) => sum + getPriceFrom(s), 0);
+
+      const lines = [];
+      lines.push("Здравствуйте! Хочу записаться на антикоррозийную обработку / шумоизоляцию салона (Астана).");
+      lines.push("");
+      lines.push("Данные автомобиля для точного расчёта:");
+      lines.push(`• Тип кузова: ${getCarLabel()}`);
+      lines.push(`• Марка/модель: ${car.brand} ${car.model}`);
+      lines.push(`• Год выпуска: ${car.year}`);
+      lines.push(`• Пробег: ${car.mileage}`);
+      lines.push("");
+
+      if (chosen.length){
+        lines.push("Выбранные услуги:");
+        chosen.forEach((s, i) => lines.push(`${i+1}) ${s.title} — ${getLabelFrom(s)} (ориентир)`));
+        lines.push("");
+        lines.push(`Ориентировочная сумма “от”: ${fmt(totalFrom)}`);
+        lines.push("Понимаю, что точная стоимость рассчитывается индивидуально после уточнения деталей.");
+      } else {
+        lines.push("Услуги: пока не выбраны.");
+      }
+
+      lines.push("");
+      lines.push("Подскажите, пожалуйста, ближайшее время для записи?");
+      return lines.join("\n");
+    }
+
+    function openWhatsApp(){
+      const url = `https://wa.me/${phoneE164}?text=${encodeURIComponent(buildWhatsAppText())}`;
+      window.open(url, "_blank", "noopener");
+    }
+
+    function renderServices(){
+      svcList.innerHTML = "";
+      services.forEach(svc => {
+        const id = `chk_${svc.id}`;
+        const label = document.createElement("label");
+        label.setAttribute("for", id);
+
+        const left = document.createElement("div");
+        left.className = "left";
+        left.innerHTML = `<b>${escapeHtml(svc.title)}</b><span>${escapeHtml(svc.note)}</span>`;
+
+        const right = document.createElement("div");
+        right.className = "right";
+
+        const pill = document.createElement("div");
+        pill.className = "pill";
+        pill.textContent = getLabelFrom(svc);
+
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.id = id;
+        input.checked = selected.has(svc.id);
+        input.addEventListener("change", () => {
+          if (input.checked) selected.add(svc.id); else selected.delete(svc.id);
+          renderSummary();
+        });
+
+        right.appendChild(pill);
+        right.appendChild(input);
+        label.appendChild(left);
+        label.appendChild(right);
+        svcList.appendChild(label);
+      });
+
+      renderSummary();
+    }
+
+    function renderSummary(){
+      const chosen = services.filter(s => selected.has(s.id));
+      const totalFrom = chosen.reduce((sum, s) => sum + getPriceFrom(s), 0);
+      totalEl.textContent = fmt(totalFrom);
+
+      summaryList.innerHTML = "";
+      if (!chosen.length){
+        summaryText.textContent = "Выберите услуги — сообщение сформируется автоматически.";
+        return;
+      }
+      summaryText.textContent = "Ваш выбор (ориентиры “от”):";
+      chosen.forEach(s => {
+        const li = document.createElement("li");
+        li.textContent = `${s.title} — ${getLabelFrom(s)} (индивидуальный расчёт)`;
+        summaryList.appendChild(li);
+      });
+    }
+
+    function initBrandModel(){
+      const brands = Object.keys(carDB).sort((a,b)=>a.localeCompare(b, "ru"));
+      brandSel.innerHTML =
+        `<option value="" selected disabled>Выберите марку</option>` +
+        brands.map(b => `<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join("");
+
+      modelSel.innerHTML = `<option value="" selected disabled>Сначала выберите марку</option>`;
+      modelSel.disabled = true;
+
+      brandSel.addEventListener("change", () => {
+        const b = brandSel.value;
+        const models = (carDB[b] || []).slice().sort((a,b)=>a.localeCompare(b,"ru"));
+        modelSel.innerHTML =
+          `<option value="" selected disabled>Выберите модель</option>` +
+          models.map(m => `<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`).join("");
+        modelSel.disabled = false;
+
+        useManualCar = false;
+        updateBrandPreview();
+      });
+
+      modelSel.addEventListener("change", () => {
+        useManualCar = false;
+        updateBrandPreview();
+      });
+
+      yearSel.addEventListener("change", updateBrandPreview);
+      mileageInp.addEventListener("input", updateBrandPreview);
+    }
+
+    function initYears(){
+      const now = new Date().getFullYear();
+      const start = 2005;
+      let html = `<option value="" selected disabled>Выберите год</option>`;
+      for (let y = now; y >= start; y--) html += `<option value="${y}">${y}</option>`;
+      yearSel.innerHTML = html;
+    }
+
+    function setCarType(type){
+      carType = type;
+      btnC.classList.toggle("active", carType === "crossover");
+      btnS.classList.toggle("active", carType === "sedan");
+      renderServices();
+    }
+    btnC.addEventListener("click", () => setCarType("crossover"));
+    btnS.addEventListener("click", () => setCarType("sedan"));
+
+    document.getElementById("useManual").addEventListener("click", () => { useManualCar = true; updateBrandPreview(); });
+    document.getElementById("useSelect").addEventListener("click", () => { useManualCar = false; updateBrandPreview(); });
+    [manualBrand, manualModel, manualYear, manualMileage].forEach(el => {
+      el.addEventListener("input", () => { useManualCar = true; updateBrandPreview(); });
+    });
+
+    document.getElementById("btnWhatsApp").addEventListener("click", openWhatsApp);
+    document.getElementById("fabWa").addEventListener("click", openWhatsApp);
+
+    // Phone modal
+    const modal = document.getElementById("phoneModal");
+    const openers = [document.getElementById("openPhone1"), document.getElementById("openPhone2"), document.getElementById("openPhone3")].filter(Boolean);
+    const closeBtn = document.getElementById("closeModal");
+    function openModal(){ modal.classList.add("open"); }
+    function closeModal(){ modal.classList.remove("open"); }
+    openers.forEach(b => b.addEventListener("click", openModal));
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+    document.getElementById("btnWhatsAppFromModal").addEventListener("click", () => { closeModal(); openWhatsApp(); });
+
+    // Smooth anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (!id || id === "#") return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior:"smooth", block:"start" });
+      });
+    });
+
+    // Parallax + text behind car
+    const parallaxRoot = document.querySelector(".heroParallax");
+    const layers = [...parallaxRoot.querySelectorAll("[data-depth]")];
+    const heroText = document.getElementById("heroText");
+    const heroSub  = document.getElementById("heroSub");
+    function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+
+    function tick(){
+      const r = parallaxRoot.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const progress = clamp((vh - r.top) / (vh + r.height), 0, 1);
+
+      layers.forEach(el => {
+        const d = parseFloat(el.getAttribute("data-depth") || "0.2");
+        const ty = progress * (130 * d);
+        const sc = 1 + d * 0.06;
+        el.style.transform = `translate3d(0, ${ty}px, 0) scale(${sc})`;
+      });
+
+      const fade = clamp((progress - 0.30) / 0.50, 0, 1);
+      heroText.style.transform = `translate3d(${-(progress*12)}px, ${(progress*140)}px, 0)`;
+      heroSub.style.transform  = `translate3d(${-(progress*12)}px, ${(progress*105)}px, 0)`;
+      heroText.style.opacity = String(1 - fade * 0.86);
+      heroSub.style.opacity  = String(1 - fade * 0.96);
+
+      if (progress > 0.55){
+        heroText.style.zIndex = "2";
+        heroSub.style.zIndex = "2";
+      } else {
+        heroText.style.zIndex = "3";
+        heroSub.style.zIndex = "3";
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    // Init
+    document.getElementById("year").textContent = new Date().getFullYear();
+    initBrandModel();
+    initYears();
+    setCarType("crossover");
+    renderServices();
+    updateBrandPreview();
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
